@@ -74,6 +74,7 @@ function image_style_quality_form_alter(&$form, &$form_state, $form_id) {
 
 }
 
+
 /*
  * The configuration form used to ask the user what quality their image
  * should be.
@@ -99,6 +100,10 @@ function _image_style_quality_form($data) {
 }
 
 
+/**
+ * This function validates the percentage input by a user to two conditions,
+ * it must be numeric and it must fall within 1 and 100.
+ */
 function _image_style_quality_form_quality_validate($element, &$form_state, $form) {
 
   // Get the value entered by the user.
@@ -117,6 +122,11 @@ function _image_style_quality_form_quality_validate($element, &$form_state, $for
 }
 
 
+/**
+ * This function is called when the image is ready for proccessing. It
+ * sets the sites quality setting to the percentage defined in our
+ * image style.
+ */
 function _image_style_quality_apply(&$image, $data) {
 
   // Grab the quality from our image style.
@@ -128,8 +138,12 @@ function _image_style_quality_apply(&$image, $data) {
 }
 
 
+/**
+ * This function resets the sites image quality back to the original global
+ * quality defined in this module.
+ */
 function _image_style_quality_reset_to_global() {
-  
+
   // We want to access the global configuration of the site.
   global $conf;
 
