@@ -1,9 +1,9 @@
 <?php
 
 /**
- * This module is intended to allow users to set custom quality settings
- * on individual image styles with no core hacks.
  * @file
+ * This module is intended to allow users to set custom quality settings
+ * on individual image styles with no core hacks
  */
 
 
