@@ -4,7 +4,7 @@
 /**
  * * Implements hook_install()
  */
-function image_style_quality_install(){
+function image_style_quality_install() {
 
   //Get the sites global image quality
   $site_image_quality = variable_get('image_jpeg_quality', 75);
@@ -18,7 +18,7 @@ function image_style_quality_install(){
 /**
  * Implements hook_image_styles_alter()
  */ 
-function image_style_quality_init(){
+function image_style_quality_init() {
 
   //We want to reset our sites global quality to match the one that
   //we have defined to be our global quality override. 
@@ -30,7 +30,7 @@ function image_style_quality_init(){
 /**
  * Implements hook_image_effect_info()
  */
-function image_style_quality_image_effect_info(){
+function image_style_quality_image_effect_info() {
 
   $effects = array();
   
@@ -51,7 +51,7 @@ function image_style_quality_image_effect_info(){
 /**
  * Implements hook_form_alter()
  */
-function image_style_quality_form_alter(&$form,&$form_state,$form_id){
+function image_style_quality_form_alter(&$form, &$form_state, $form_id) {
 
   if ($form_id == 'system_image_toolkit_settings') {
 
@@ -75,7 +75,7 @@ function image_style_quality_form_alter(&$form,&$form_state,$form_id){
 /*
  * The configuration form used to ask the user what quality their image should be.
  */
-function _image_style_quality_form($data){
+function _image_style_quality_form($data) {
   
   $form = array();
 
@@ -96,7 +96,7 @@ function _image_style_quality_form($data){
 }
 
 
-function _image_style_quality_form_quality_validate($element, &$form_state, $form){
+function _image_style_quality_form_quality_validate($element, &$form_state, $form) {
   
   //Get the value entered by the user  
   $value = $element['#value'];
@@ -114,7 +114,7 @@ function _image_style_quality_form_quality_validate($element, &$form_state, $for
 }
 
 
-function _image_style_quality_apply(&$image, $data){
+function _image_style_quality_apply(&$image, $data) {
   
   //Grab the quality from our image style
   $image_style_quality = $data['quality'];
@@ -125,7 +125,7 @@ function _image_style_quality_apply(&$image, $data){
 }
 
 
-function _image_style_quality_reset_to_global(){
+function _image_style_quality_reset_to_global() {
   
   //Get the global sites quality  
   $global_quality = variable_get('image_style_quality_global_quality', 75);
