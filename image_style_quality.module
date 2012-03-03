@@ -6,10 +6,10 @@
  */
 function image_style_quality_install() {
 
-  // Get the sites global image quality
+  // Get the sites global image quality.
   $site_image_quality = variable_get('image_jpeg_quality', 75);
 
-  // Set our new global image jpeg quality variable
+  // Set our new global image jpeg quality variable.
   variable_set('image_style_quality_global_quality', $site_image_quality);
 
 }
@@ -20,8 +20,9 @@ function image_style_quality_install() {
  */ 
 function image_style_quality_init() {
 
-  // We want to reset our sites global quality to match the one that
-  // we have defined to be our global quality override. 
+  /* We want to reset our sites global quality to match the one that
+   * we have defined to be our global quality override.
+   */ 
   _image_style_quality_reset_to_global();
 
 }
@@ -34,7 +35,7 @@ function image_style_quality_image_effect_info() {
 
   $effects = array();
   
-  // Define all the paramters of our new style
+  // Define all the paramters of our new style.
   $effects['image_style_quality'] = array(
     'label' => t('Change Quality'),
     'help' => t('Define the image quality for JPEG manipulations. Ranges from 0 to 100. Higher values mean better image quality but bigger files.'),
@@ -55,17 +56,17 @@ function image_style_quality_form_alter(&$form, &$form_state, $form_id) {
 
   if ($form_id == 'system_image_toolkit_settings') {
 
-    // Get the original element that holds the sites quality
+    // Get the original element that holds the sites quality.
     $original_quality_element = &$form['image_toolkit_settings']['image_jpeg_quality'];
   
-    // Create a new variable which stores our valid global quality
+    // Create a new variable which stores our valid global quality.
     $new_quality_element = &$form['image_toolkit_settings']['image_style_quality_global_quality'];
     $new_quality_element = $original_quality_element;
 
-    // Make the default value of the new quality element the correct variable
+    // Make the default value of the new quality element the correct variable.
     $new_quality_element['#default_value'] = variable_get('image_style_quality_global_quality', 75);
 
-    // The old quality element no longer stores our valid global quality
+    // The old quality element no longer stores our valid global quality.
     $original_quality_element['#type'] = "hidden";
 
   }
@@ -79,7 +80,7 @@ function _image_style_quality_form($data) {
   
   $form = array();
 
-  // Collect the quality of our image style, keep the default 75
+  // Collect the quality of our image style, keep the default 75.
   $form['quality'] = array(
     '#title' => t('Image Quality'),
     '#type' => 'textfield',
@@ -90,7 +91,7 @@ function _image_style_quality_form($data) {
     '#required' => true,
   );
 
-  // Return our form to hook_image_effect_info
+  // Return our form to hook_image_effect_info.
   return $form;
 
 }
@@ -98,15 +99,15 @@ function _image_style_quality_form($data) {
 
 function _image_style_quality_form_quality_validate($element, &$form_state, $form) {
   
-  // Get the value entered by the user  
+  // Get the value entered by the user.
   $value = $element['#value'];
   
-  // Make sure we are dealing with a number
+  // Make sure we are dealing with a number.
   if (!is_numeric($value)) {
     form_set_error('quality', 'Please enter a percentage as a single digit, eg "70"');
   }
 
-  // Make sure that number falls within a valid range
+  // Make sure that number falls within a valid range.
   if ($value <= 0 || $value > 100) {
     form_set_error('quality', 'Please enter a percentage between 0 and 100.');
   }
@@ -116,7 +117,7 @@ function _image_style_quality_form_quality_validate($element, &$form_state, $for
 
 function _image_style_quality_apply(&$image, $data) {
   
-  // Grab the quality from our image style
+  // Grab the quality from our image style.
   $image_style_quality = $data['quality'];
   
   // Set the sites internal quality to be the one defined by our image style
@@ -127,10 +128,10 @@ function _image_style_quality_apply(&$image, $data) {
 
 function _image_style_quality_reset_to_global() {
   
-  // Get the global sites quality  
+  // Get the global sites quality.
   $global_quality = variable_get('image_style_quality_global_quality', 75);
 
-  // Reset the websites image style quality to the one the user has defined
+  // Reset the websites image style quality to the one the user has defined.
    variable_set('image_jpeg_quality', $global_quality);
 
 }
