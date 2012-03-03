@@ -18,7 +18,7 @@ function image_style_quality_install(){
 /**
  * Implementation of hook_image_styles_alter()
  */ 
-function image_style_quality_image_styles_alter(){
+function image_style_quality_init(){
 
   //We want to reset our sites global quality to match the one that
   //we have defined to be our global quality override. 
