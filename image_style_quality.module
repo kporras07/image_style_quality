@@ -20,7 +20,7 @@ function image_style_quality_install(){
  */ 
 function image_style_quality_init(){
   
-  //We want to reset our sites global quality to match the one that 
+  //We want to reset our sites global quality to match the one that
   //we have defined to be our global quality override. 
   _image_style_quality_reset_to_global();
 
@@ -37,7 +37,7 @@ function image_style_quality_image_effect_info(){
   //Define all the paramters of our new style
   $effects['image_style_quality'] = array(
       'label' => t('Change Quality'), 
-      'help' => t('This will change the quality of this image. Enter a percentage out of 100.'), 
+      'help' => t('This will change the quality of this image. Enter a percentage out of 100.'),
     'effect callback' => '_image_style_quality_apply',
     'form callback' => '_image_style_quality_form',
     'dimensions passthrough' => true
