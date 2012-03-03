@@ -75,8 +75,8 @@ function image_style_quality_help ($path, $arg) {
     // If we are on this modules help page.
     case 'admin/help#image_style_quality':
       return
-        '<h3>' . t('About') . '</h3>'
-        . '<p>'.t('This module is allows you to create new <em>Image 
+        '<h3>' . t('About') . '</h3>
+        <p>'.t('This module is allows you to create new <em>Image 
         style</em> effects to modify the quality of images. To use this
         module all you have to do is navigate to your desired <em>Image
         style</em> by clicking "Configuration" > "Image Styles" and then
