@@ -8,20 +8,6 @@
 
 
 /**
- * * Implements hook_install()
- */
-function image_style_quality_install() {
-
-  // Get the sites global image quality.
-  $site_image_quality = variable_get('image_jpeg_quality', 75);
-
-  // Set our new global image jpeg quality variable.
-  variable_set('image_style_quality_global_quality', $site_image_quality);
-
-}
-
-
-/**
  * Implements hook_image_styles_alter().
  */
 function image_style_quality_init() {
@@ -44,7 +30,7 @@ function image_style_quality_image_effect_info() {
     'label' => t('Change Quality'),
     'help' => t('Define the image quality for JPEG manipulations. Ranges from 0 to 100. Higher values mean better image quality but bigger files.'),
     'effect callback' => '_image_style_quality_apply',
-    'form callback' => '_image_style_quality_form',
+    'form callback' => 'image_style_quality_style_form',
     'dimensions passthrough' => TRUE,
   );
 
@@ -79,10 +65,36 @@ function image_style_quality_form_alter(&$form, &$form_state, $form_id) {
 
 
 /**
+ * Implements hook_form_alter().
+ */
+function image_style_quality_help ($path, $arg) {
+
+  // Allow users to have some extra help on certain pages or args.
+  switch($path){
+
+    // If we are on this modules help page.
+    case 'admin/help#image_style_quality':
+    	return
+          '<h3>'.t('About').'</h3>'
+          .'<p>'.t('This module is allows you to create new <em>Image 
+          style</em> effects to modify the quality of images. To use this
+          module all you have to do is navigate to your desired <em>Image
+          style</em> by clicking "Configuration" > "Image Styles" and then
+          "Edit" or "Add Style". You will have the option to "Change
+          Quality" in the "Add new effect" dropdown menu. You may use
+          this quality setting in any order, in combonation with any
+          other set of effects.').'</p>';
+  		break;
+  }
+
+}
+
+
+/**
  * The configuration form used to ask the user what quality their image
  * should be.
  */
-function _image_style_quality_form($data) {
+function image_style_quality_style_form($data) {
 
   $form = array();
 
@@ -114,12 +126,12 @@ function _image_style_quality_form_quality_validate($element, &$form_state, $for
 
   // Make sure we are dealing with a number.
   if (!is_numeric($value)) {
-    form_set_error('quality', 'Please enter a percentage as a single digit, eg "70"');
+    form_set_error('quality', t('Please enter a percentage as a single digit, eg "70"'));
   }
 
   // Make sure that number falls within a valid range.
   if ($value <= 0 || $value > 100) {
-    form_set_error('quality', 'Please enter a percentage between 0 and 100.');
+    form_set_error('quality', t('Please enter a percentage between 0 and 100.'));
   }
 
 }
