@@ -75,7 +75,7 @@ function image_style_quality_form_alter(&$form, &$form_state, $form_id) {
 }
 
 
-/*
+/**
  * The configuration form used to ask the user what quality their image
  * should be.
  */
@@ -158,4 +158,3 @@ function _image_style_quality_reset_to_global() {
   }
 
 }
-
