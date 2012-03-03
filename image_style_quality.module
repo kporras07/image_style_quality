@@ -17,12 +17,12 @@ function image_style_quality_install() {
 
 /**
  * Implements hook_image_styles_alter().
- */ 
+ */
 function image_style_quality_init() {
 
   /* We want to reset our sites global quality to match the one that
    * we have defined to be our global quality override.
-   */ 
+   */
   _image_style_quality_reset_to_global();
 
 }
@@ -34,14 +34,14 @@ function image_style_quality_init() {
 function image_style_quality_image_effect_info() {
 
   $effects = array();
-  
+
   // Define all the paramters of our new style.
   $effects['image_style_quality'] = array(
     'label' => t('Change Quality'),
     'help' => t('Define the image quality for JPEG manipulations. Ranges from 0 to 100. Higher values mean better image quality but bigger files.'),
     'effect callback' => '_image_style_quality_apply',
     'form callback' => '_image_style_quality_form',
-    'dimensions passthrough' => true,
+    'dimensions passthrough' => TRUE,
   );
 
   return $effects;
@@ -58,7 +58,7 @@ function image_style_quality_form_alter(&$form, &$form_state, $form_id) {
 
     // Get the original element that holds the sites quality.
     $original_quality_element = &$form['image_toolkit_settings']['image_jpeg_quality'];
-  
+
     // Create a new variable which stores our valid global quality.
     $new_quality_element = &$form['image_toolkit_settings']['image_style_quality_global_quality'];
     $new_quality_element = $original_quality_element;
@@ -74,11 +74,11 @@ function image_style_quality_form_alter(&$form, &$form_state, $form_id) {
 }
 
 /*
- * The configuration form used to ask the user what quality their image 
+ * The configuration form used to ask the user what quality their image
  * should be.
  */
 function _image_style_quality_form($data) {
-  
+
   $form = array();
 
   // Collect the quality of our image style, keep the default 75.
@@ -89,7 +89,7 @@ function _image_style_quality_form($data) {
     '#field_prefix' => '%',
     '#size' => 4,
     '#element_validate' => array('_image_style_quality_form_quality_validate'),
-    '#required' => true,
+    '#required' => TRUE,
   );
 
   // Return our form to hook_image_effect_info.
@@ -99,10 +99,10 @@ function _image_style_quality_form($data) {
 
 
 function _image_style_quality_form_quality_validate($element, &$form_state, $form) {
-  
+
   // Get the value entered by the user.
   $value = $element['#value'];
-  
+
   // Make sure we are dealing with a number.
   if (!is_numeric($value)) {
     form_set_error('quality', 'Please enter a percentage as a single digit, eg "70"');
@@ -117,11 +117,11 @@ function _image_style_quality_form_quality_validate($element, &$form_state, $for
 
 
 function _image_style_quality_apply(&$image, $data) {
-  
+
   // Grab the quality from our image style.
   $image_style_quality = $data['quality'];
-  
-  // Set the sites internal quality to be the one defined by our image style
+
+  // Set the sites internal quality to be the one defined by our image style.
   variable_set('image_jpeg_quality', $image_style_quality);
 
 }
