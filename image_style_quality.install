@@ -2,13 +2,13 @@
 
 /**
  * @file
- * This module installs everything required to get image_style_quality 
+ * This module installs everything required to get image_style_quality
  * up and running.
  */
 
 
 /**
- * Implements hook_install()
+ * Implements hook_install().
  */
 function image_style_quality_install() {
 
@@ -22,11 +22,11 @@ function image_style_quality_install() {
 
 
 /**
- * Implements hook_install()
+ * Implements hook_uninstall().
  */
 function image_style_quality_uninstall() {
 
-	//We no longer need our global image quality. Delete it.
-	variable_del('image_style_quality_global_quality');
+  // We no longer need our global image quality. Delete it.
+  variable_del('image_style_quality_global_quality');
 
 }
