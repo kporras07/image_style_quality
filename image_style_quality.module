@@ -2,7 +2,7 @@
 
 
 /**
- * Implementation of hook_install()
+ * * Implements hook_install()
  */
 function image_style_quality_install(){
 
@@ -16,7 +16,7 @@ function image_style_quality_install(){
 
 
 /**
- * Implementation of hook_image_styles_alter()
+ * Implements hook_image_styles_alter()
  */ 
 function image_style_quality_init(){
 
@@ -28,7 +28,7 @@ function image_style_quality_init(){
 
 
 /**
- * Implementation of hook_image_effect_info()
+ * Implements hook_image_effect_info()
  */
 function image_style_quality_image_effect_info(){
 
@@ -49,7 +49,7 @@ function image_style_quality_image_effect_info(){
 
 
 /**
- * Implementation of hook_form_alter()
+ * Implements hook_form_alter()
  */
 function image_style_quality_form_alter(&$form,&$form_state,$form_id){
 
