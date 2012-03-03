@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * This module is intended to allow users to set custom quality settings
+ * on individual image styles with no core hacks.
+ * @file
+ */
+
 
 /**
  * * Implements hook_install()
@@ -20,10 +26,7 @@ function image_style_quality_install() {
  */
 function image_style_quality_init() {
 
-  /**
-   * We want to reset our sites global quality to match the one that
-   * we have defined to be our global quality override.
-   */
+  // When the site initialises reset the sites quality setting.
   _image_style_quality_reset_to_global();
 
 }
