@@ -20,7 +20,8 @@ function image_style_quality_install() {
  */
 function image_style_quality_init() {
 
-  /* We want to reset our sites global quality to match the one that
+  /**
+   * We want to reset our sites global quality to match the one that
    * we have defined to be our global quality override.
    */
   _image_style_quality_reset_to_global();
