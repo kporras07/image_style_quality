@@ -46,20 +46,35 @@ function image_style_quality_form_alter(&$form, &$form_state, $form_id) {
 
   if ($form_id == 'system_image_toolkit_settings') {
 
-    // Get the original element that holds the sites quality.
-    $original_quality_element = &$form['image_toolkit_settings']['image_jpeg_quality'];
+    // Get our global image quality.
+    $global_quality = variable_get('image_style_quality_global_quality',75);
 
-    // Create a new variable which stores our valid global quality.
-    $new_quality_element = &$form['image_toolkit_settings']['image_style_quality_global_quality'];
-    $new_quality_element = $original_quality_element;
+    // Define our form element responsible for quality.
+    $quality = &$form['image_toolkit_settings']['image_jpeg_quality'];
 
-    // Make the default value of the new quality element the correct variable.
-    $new_quality_element['#default_value'] = variable_get('image_style_quality_global_quality', 75);
+    // Set the value of the text element to match our global quality.
+    $quality['#default_value'] = $global_quality;
 
-    // The old quality element no longer stores our valid global quality.
-    $original_quality_element['#type'] = "hidden";
+    // After the form validates and is submitted, set our global quality.
+    $form['#submit'][] = 'image_style_quality_system_image_form_submit';
 
   }
+
+}
+
+
+/**
+ * This function is executed when the user input a global quality value
+ * in the backend. We assign our global quality to be the one the user
+ * has submitted.
+ */
+function image_style_quality_system_image_form_submit($form, $form_state) {
+
+  // Get what the user has submitted in the form as the quality.
+  $submitted_quality = $form_state['values']['image_jpeg_quality'];
+
+  // Set our global quality to match the one the user has submitted.
+  variable_set('image_style_quality_global_quality', $submitted_quality);
 
 }
 
