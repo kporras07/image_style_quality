@@ -176,13 +176,12 @@ function _image_style_quality_apply(&$image, $data) {
  */
 function _image_style_quality_reset_to_global() {
 
-  // We want to access the global configuration of the site.
-  global $conf;
-
-  $global_quality = $conf['image_style_quality_global_quality'];
+  // Get the sites quality and our global quality.
+  $global_quality = variable_get('image_style_quality_global_quality', 75);
+  $site_quality = variable_set('image_jpeg_quality', 75);
 
   // If our sites jpeg quality is different from our global quality, update it.
-  if ($global_quality != $conf['image_jpeg_quality']) {
+  if ($global_quality != $site_quality) {
 
     // Reset the websites image style quality to the one the user has defined.
     variable_set('image_jpeg_quality', $global_quality);
