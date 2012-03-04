@@ -178,7 +178,7 @@ function _image_style_quality_reset_to_global() {
 
   // Get the sites quality and our global quality.
   $global_quality = variable_get('image_style_quality_global_quality', 75);
-  $site_quality = variable_set('image_jpeg_quality', 75);
+  $site_quality = variable_get('image_jpeg_quality', 75);
 
   // If our sites jpeg quality is different from our global quality, update it.
   if ($global_quality != $site_quality) {
