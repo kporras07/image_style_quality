@@ -2,6 +2,7 @@
 
 /**
  * @file
+ *
  * This module is intended to allow users to set custom quality settings
  * on individual image styles with no core hacks. On a high level, the
  * module creates a global image quality variable and then overrides the
@@ -11,18 +12,18 @@
 
 /**
  * Implements hook_init().
+ *
+ * As images load on a page, when an image style is applied it sets the
+ * sites quality value to match the quality value specified by the image
+ * style. As the next image is loaded, the sites quality remains at the
+ * quality of the previously loaded image. All we are doing on hook_init
+ * is checking that the sites quality matches our global quality. If it
+ * doesn't we set it back. The footprint of this call is quite low, since
+ * in most cases we are only doing a quick comparison.
  */
 function image_style_quality_init() {
 
-  /**
-   * As images load on a page, when an image style is applied it sets the
-   * sites quality value to match the quality value specified by the image
-   * style. As the next image is loaded, the sites quality remains at the
-   * quality of the previously loaded image. All we are doing on hook_init
-   * is checking that the sites quality matches our global quality. If it
-   * doesn't we set it back. The footprint of this call is quite low, since
-   * in most cases we are only doing a quick comparison. 
-   */
+  // Reset the value of 'image_jpeg_quality'.
   _image_style_quality_reset_to_global();
 
 }
