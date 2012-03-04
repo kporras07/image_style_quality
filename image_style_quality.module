@@ -3,7 +3,9 @@
 /**
  * @file
  * This module is intended to allow users to set custom quality settings
- * on individual image styles with no core hacks
+ * on individual image styles with no core hacks. On a high level, the
+ * module creates a global image quality variable and then overrides the
+ * core image quality variable as required.
  */
 
 
