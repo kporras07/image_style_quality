@@ -10,7 +10,7 @@
 
 
 /**
- * Implements hook_image_styles_alter().
+ * Implements hook_init().
  */
 function image_style_quality_init() {
 
