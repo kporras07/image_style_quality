@@ -47,7 +47,7 @@ function image_style_quality_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'system_image_toolkit_settings') {
 
     // Get our global image quality.
-    $global_quality = variable_get('image_style_quality_global_quality',75);
+    $global_quality = variable_get('image_style_quality_global_quality', 75);
 
     // Define our form element responsible for quality.
     $quality = &$form['image_toolkit_settings']['image_jpeg_quality'];
