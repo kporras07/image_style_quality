@@ -37,7 +37,7 @@ function image_style_quality_image_effect_info() {
 
   // Define all the paramters of our new style.
   $effects['image_style_quality'] = array(
-    'label' => t('Change Quality'),
+    'label' => t('Quality'),
     'help' => t('Define the image quality for JPEG manipulations. Ranges from 0 to 100. Higher values mean better image quality but bigger files.'),
     'effect callback' => '_image_style_quality_apply',
     'form callback' => 'image_style_quality_style_form',
