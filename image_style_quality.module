@@ -34,7 +34,6 @@ function image_style_quality_init() {
 function image_style_quality_image_effect_info() {
 
   $effects = array();
-
   // Define all the paramters of our new style.
   $effects['image_style_quality'] = array(
     'label' => t('Quality'),
@@ -42,8 +41,8 @@ function image_style_quality_image_effect_info() {
     'effect callback' => '_image_style_quality_apply',
     'form callback' => 'image_style_quality_style_form',
     'dimensions passthrough' => TRUE,
+    'summary theme' => 'image_style_quality_summary',
   );
-
   return $effects;
 
 }
@@ -80,12 +79,10 @@ function image_style_quality_form_alter(&$form, &$form_state, $form_id) {
  */
 function image_style_quality_system_image_form_submit($form, $form_state) {
 
-  // Get what the user has submitted in the form as the quality.
-  $submitted_quality = $form_state['values']['image_jpeg_quality'];
-
-  // Set our global quality to match the one the user has submitted.
-  variable_set('image_style_quality_global_quality', $submitted_quality);
-
+  if($submitted_quality = $form_state['values']['image_jpeg_quality']){
+    // Set our global quality to match the one the user has submitted.
+    variable_set('image_style_quality_global_quality', $submitted_quality);
+  }
 }
 
 
@@ -174,6 +171,7 @@ function _image_style_quality_apply(&$image, $data) {
 
   // Set the sites internal quality to be the one defined by our image style.
   variable_set('image_jpeg_quality', $image_style_quality);
+  variable_set('imagemagick_quality', $image_style_quality);
 
 }
 
@@ -193,7 +191,29 @@ function _image_style_quality_reset_to_global() {
 
     // Reset the websites image style quality to the one the user has defined.
     variable_set('image_jpeg_quality', $global_quality);
+    variable_set('imagemagick_quality', $global_quality);
 
   }
 
+}
+
+
+/**
+ * Implements hook_theme().
+ */
+function image_style_quality_theme() {
+  return array(
+    'image_style_quality_summary' => array(
+      'variables' => array('data' => NULL),
+    ),
+  );
+}
+
+
+/**
+ * Theme function for formatting a percentage quality.
+ */
+function theme_image_style_quality_summary($variables) {
+  $data = $variables['data'];
+  return $data['quality'] . '%';
 }
