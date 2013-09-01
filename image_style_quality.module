@@ -79,10 +79,21 @@ function image_style_quality_form_alter(&$form, &$form_state, $form_id) {
  */
 function image_style_quality_system_image_form_submit($form, $form_state) {
 
-  if($submitted_quality = $form_state['values']['image_jpeg_quality']){
-    // Set our global quality to match the one the user has submitted.
+  $values = &$form_state['values'];
+
+  // Check which image quality was entered, and support imagemagick.
+  $submitted_quality = FALSE;
+  if (isset($form_state['values']['image_jpeg_quality'])) {
+    $submitted_quality = $form_state['values']['image_jpeg_quality'];
+  } else if (isset($values['image_toolkit']) && $values['image_toolkit'] == 'imagemagick') {
+    $submitted_quality = $form_state['values']['imagemagick_quality'];
+  }
+
+  // Set our global quality to match the one the user has submitted.
+  if ($submitted_quality) {
     variable_set('image_style_quality_global_quality', $submitted_quality);
   }
+
 }
 
 
