@@ -8,10 +8,10 @@
 namespace Drupal\image_style_quality\Plugin\ImageEffect;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
-use Drupal\image\ImageEffectBase;
-use Drupal\image\ConfigurableImageEffectInterface;
 use Drupal\Core\Image\ImageInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\image\ImageEffectBase;
+use Drupal\image\ConfigurableImageEffectInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 
