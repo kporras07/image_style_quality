@@ -7,7 +7,7 @@
 
 namespace Drupal\image_style_quality\Plugin\ImageEffect;
 
-use Drupal\Core\Config\ConfigFactory;
+use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\image\ImageEffectBase;
 use Drupal\image\ConfigurableImageEffectInterface;
 use Drupal\Core\Image\ImageInterface;
@@ -36,7 +36,7 @@ class ImageStyleQualityImageEffect extends ImageEffectBase implements Configurab
       '#description' => t('Define the image quality for JPEG manipulations. Ranges from 0 to 100. Higher values mean better image quality but bigger files.'),
       '#min' => 0,
       '#max' => 100,
-      '#default_value' => \Drupal::config('system.image.gd')->get('jpeg_quality'),
+      '#default_value' => $this->config->get('system.image.gd')->get('jpeg_quality'),
       '#field_suffix' => t('%'),
     );
     return $form;
