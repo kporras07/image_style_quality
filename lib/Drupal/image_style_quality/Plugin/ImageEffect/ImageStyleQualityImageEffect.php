@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains \Drupal\image_style_lifestyle\Plugin\ImageEffect\ImageStyleQualityImageEffect
+ * Contains \Drupal\image_style_quality\Plugin\ImageEffect\ImageStyleQualityImageEffect
  */
 
 namespace Drupal\image_style_quality\Plugin\ImageEffect;
