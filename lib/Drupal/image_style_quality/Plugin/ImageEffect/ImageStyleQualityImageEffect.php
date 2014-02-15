@@ -14,7 +14,6 @@ use Drupal\image\ImageEffectBase;
 use Drupal\image\ConfigurableImageEffectInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-
 /**
  * Allows you to change the quality of an image, per image style.
  *
@@ -72,6 +71,16 @@ class ImageStyleQualityImageEffect extends ImageEffectBase implements Configurab
       $plugin_id,
       $plugin_definition,
       $container->get('config.factory')
+    );
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getSummary() {
+    $quality = $this->configuration['image_jpeg_quality'];
+    return array(
+      '#markup' => '(' . $quality . '% ' . $this->t('Quality') . ')',
     );
   }
 
