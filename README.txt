@@ -1,5 +1,7 @@
-Welcome to Image Style Quality
-==============================
+Image Style Quality
+===================
 
-To change the quality of images on a per-image-style basis, enable this module
-and add a new "Image Style Quality" image effect to your image styles.
+1. Install module.
+2. Navigate to an image style you wish to change the quality for.
+3. Add a new "Image Style Quality" image effect to your style.
+4. Configure a percentage quality and click "Save".
