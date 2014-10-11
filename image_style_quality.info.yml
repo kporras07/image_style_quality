@@ -1,6 +1,6 @@
 name: Image Style Quality
 type: module
-description: 'Provides an image style that allows you to choose the quality of your images.'
+description: 'Provides an image effect plugin that allows you to choose the quality of images.'
 core: 8.x
 package: Media
 version: VERSION
