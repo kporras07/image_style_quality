@@ -1,0 +1,8 @@
+name: Image Style Quality Test
+type: module
+description: 'Test config for image style quality.'
+core: 8.x
+package: Media
+version: VERSION
+dependencies:
+  - image
