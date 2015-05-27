@@ -11,5 +11,5 @@ effects:
     id: image_style_quality
     weight: 1
     data:
-      quality: '100'
+      quality: 100
 
