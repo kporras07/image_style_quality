@@ -30,32 +30,30 @@ class ImageStyleQualityImageEffect extends ConfigurableImageEffectBase {
    *
    * @var \Drupal\Core\Config\ImmutableConfig
    */
-  var $gd_config = NULL;
+  protected $gd_config;
 
   /**
    * {@inheritdoc}
    */
   public function applyEffect(ImageInterface $image) {
-    $quality = $this->configuration['quality'];
-    $this->gd_config->setModuleOverride(array(
-      'jpeg_quality' => $quality
-    ));
+    $this->gd_config->setModuleOverride([
+      'jpeg_quality' => $this->configuration['quality'],
+    ]);
   }
 
   /**
    * {@inheritdoc}
    */
   public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
-    $existing_quality = isset($this->configuration['quality']) ? $this->configuration['quality'] : '75';
-    $form['quality'] = array(
+    $form['quality'] = [
       '#type' => 'number',
       '#title' => t('Quality'),
       '#description' => t('Define the image quality for JPEG manipulations. Ranges from 0 to 100. Higher values mean better image quality but bigger files.'),
       '#min' => 0,
       '#max' => 100,
-      '#default_value' => $existing_quality,
+      '#default_value' => $this->configuration['quality'],
       '#field_suffix' => t('%'),
-    );
+    ];
     return $form;
   }
 
@@ -70,10 +68,18 @@ class ImageStyleQualityImageEffect extends ConfigurableImageEffectBase {
    * {@inheritdoc}
    */
   public function getSummary() {
-    $quality = $this->configuration['quality'];
-    return array(
-      '#markup' => '(' . $quality . '% ' . $this->t('Quality') . ')',
-    );
+    return [
+      '#markup' => '(' . $this->configuration['quality'] . '% ' . $this->t('Quality') . ')',
+    ];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function defaultConfiguration() {
+    return [
+      'quality' => 75,
+    ];
   }
 
   /**

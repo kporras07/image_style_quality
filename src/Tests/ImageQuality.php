@@ -14,6 +14,10 @@ use Drupal\simpletest\WebTestBase;
  * @group image_style_quality
  */
 class ImageQuality extends WebTestBase {
+
+  /**
+   * @var array
+   */
   public static $modules = [
     'image_style_quality',
     'image_style_quality_test',
