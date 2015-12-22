@@ -7,6 +7,7 @@
 
 namespace Drupal\image_style_quality\Plugin\ImageEffect;
 
+use Drupal\Core\Config\ImmutableConfig;
 use Drupal\Core\Image\ImageInterface;
 use Drupal\image\ConfigurableImageEffectBase;
 use Drupal\Core\Form\FormStateInterface;
@@ -27,7 +28,7 @@ class ImageStyleQualityImageEffect extends ConfigurableImageEffectBase {
   /**
    * The GD image config object.
    *
-   * @var null
+   * @var \Drupal\Core\Config\ImmutableConfig
    */
   var $gd_config = NULL;
 
@@ -78,7 +79,7 @@ class ImageStyleQualityImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, LoggerInterface $logger, $gd_config) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, LoggerInterface $logger, ImmutableConfig $gd_config) {
     parent::__construct($configuration, $plugin_id, $plugin_definition, $logger);
     $this->gd_config = $gd_config;
   }
