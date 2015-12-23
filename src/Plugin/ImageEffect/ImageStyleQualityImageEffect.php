@@ -7,7 +7,7 @@
 
 namespace Drupal\image_style_quality\Plugin\ImageEffect;
 
-use Drupal\Core\Config\ImmutableConfig;
+use Drupal\Core\Config\Config;
 use Drupal\Core\Image\ImageInterface;
 use Drupal\image\ConfigurableImageEffectBase;
 use Drupal\Core\Form\FormStateInterface;
@@ -28,15 +28,15 @@ class ImageStyleQualityImageEffect extends ConfigurableImageEffectBase {
   /**
    * The GD image config object.
    *
-   * @var \Drupal\Core\Config\ImmutableConfig
+   * @var \Drupal\Core\Config\Config
    */
-  protected $gd_config;
+  protected $gdConfig;
 
   /**
    * {@inheritdoc}
    */
   public function applyEffect(ImageInterface $image) {
-    $this->gd_config->setModuleOverride([
+    $this->gdConfig->setModuleOverride([
       'jpeg_quality' => $this->configuration['quality'],
     ]);
   }
@@ -47,12 +47,12 @@ class ImageStyleQualityImageEffect extends ConfigurableImageEffectBase {
   public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
     $form['quality'] = [
       '#type' => 'number',
-      '#title' => t('Quality'),
-      '#description' => t('Define the image quality for JPEG manipulations. Ranges from 0 to 100. Higher values mean better image quality but bigger files.'),
+      '#title' => $this->t('Quality'),
+      '#description' => $this->t('Define the image quality for JPEG manipulations. Ranges from 0 to 100. Higher values mean better image quality but bigger files.'),
       '#min' => 0,
       '#max' => 100,
       '#default_value' => $this->configuration['quality'],
-      '#field_suffix' => t('%'),
+      '#field_suffix' => $this->t('%'),
     ];
     return $form;
   }
@@ -85,9 +85,9 @@ class ImageStyleQualityImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, LoggerInterface $logger, ImmutableConfig $gd_config) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, LoggerInterface $logger, Config $gd_config) {
     parent::__construct($configuration, $plugin_id, $plugin_definition, $logger);
-    $this->gd_config = $gd_config;
+    $this->gdConfig = $gd_config;
   }
 
   /**

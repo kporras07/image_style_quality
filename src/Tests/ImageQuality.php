@@ -3,6 +3,7 @@
  * @file
  * Test that image style quality works.
  */
+
 namespace Drupal\image_style_quality\Tests;
 
 use Drupal\image\Entity\ImageStyle;
@@ -16,6 +17,8 @@ use Drupal\simpletest\WebTestBase;
 class ImageQuality extends WebTestBase {
 
   /**
+   * Modules to enable.
+   *
    * @var array
    */
   public static $modules = [
@@ -39,4 +42,5 @@ class ImageQuality extends WebTestBase {
 
     $this->assertTrue($large_filesize > $small_filesize * 10, 'The compressed image style reduced the filesize of an image by a factor of 10.');
   }
+
 }
