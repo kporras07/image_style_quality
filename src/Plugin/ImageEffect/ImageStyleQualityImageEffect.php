@@ -1,13 +1,8 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\image_style_quality\Plugin\ImageEffect\ImageStyleQualityImageEffect.
- */
-
 namespace Drupal\image_style_quality\Plugin\ImageEffect;
 
-use Drupal\Core\Config\Config;
+use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Image\ImageInterface;
 use Drupal\image\ConfigurableImageEffectBase;
 use Drupal\Core\Form\FormStateInterface;
@@ -26,18 +21,25 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class ImageStyleQualityImageEffect extends ConfigurableImageEffectBase {
 
   /**
-   * The GD image config object.
+   * A mutable quality toolkit.
    *
-   * @var \Drupal\Core\Config\Config
+   * @var array
    */
-  protected $gdConfig;
+  protected $mutableQualityToolkit;
+
+  /**
+   * The config factory.
+   *
+   * @var \Drupal\Core\Config\ConfigFactoryInterface
+   */
+  protected $configFactory;
 
   /**
    * {@inheritdoc}
    */
   public function applyEffect(ImageInterface $image) {
-    $this->gdConfig->setModuleOverride([
-      'jpeg_quality' => $this->configuration['quality'],
+    $this->configFactory->get($this->mutableQualityToolkit['config_object'])->setModuleOverride([
+      $this->mutableQualityToolkit['config_key'] => $this->configuration['quality'],
     ]);
   }
 
@@ -69,7 +71,7 @@ class ImageStyleQualityImageEffect extends ConfigurableImageEffectBase {
    */
   public function getSummary() {
     return [
-      '#markup' => '(' . $this->configuration['quality'] . '% ' . $this->t('Quality') . ')',
+      '#markup' => $this->t('(@quality% Quality', ['@quality' => $this->configuration['quality']]),
     ];
   }
 
@@ -85,9 +87,10 @@ class ImageStyleQualityImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, LoggerInterface $logger, Config $gd_config) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, LoggerInterface $logger, $toolkit, ConfigFactoryInterface $config_factory) {
     parent::__construct($configuration, $plugin_id, $plugin_definition, $logger);
-    $this->gdConfig = $gd_config;
+    $this->mutableQualityToolkit = $toolkit;
+    $this->configFactory = $config_factory;
   }
 
   /**
@@ -99,7 +102,8 @@ class ImageStyleQualityImageEffect extends ConfigurableImageEffectBase {
       $plugin_id,
       $plugin_definition,
       $container->get('logger.factory')->get('image'),
-      $container->get('config.factory')->get('system.image.gd')
+      $container->get('image_style_quality.mutable_quality_toolkit_manager')->getActiveToolkit(),
+      $container->get('config.factory')
     );
   }
 

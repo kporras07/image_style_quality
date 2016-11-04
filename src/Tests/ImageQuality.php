@@ -1,8 +1,4 @@
 <?php
-/**
- * @file
- * Test that image style quality works.
- */
 
 namespace Drupal\image_style_quality\Tests;
 
