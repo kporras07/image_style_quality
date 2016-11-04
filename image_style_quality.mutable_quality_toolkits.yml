@@ -2,5 +2,5 @@ gd:
   config_object: system.image.gd
   config_key: jpeg_quality
 imagemagick:
-  config_object: imagemagick
+  config_object: imagemagick.settings
   config_key: quality
