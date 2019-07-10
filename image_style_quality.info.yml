@@ -6,7 +6,7 @@ package: Media
 version: VERSION
 
 dependencies:
-  - image
+  - drupal:image
 
 test_dependencies:
-  - imagemagick
+  - imagemagick:imagemagick
