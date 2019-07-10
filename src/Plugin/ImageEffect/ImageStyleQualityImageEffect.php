@@ -71,7 +71,7 @@ class ImageStyleQualityImageEffect extends ConfigurableImageEffectBase {
    */
   public function getSummary() {
     return [
-      '#markup' => $this->t('(@quality% Quality', ['@quality' => $this->configuration['quality']]),
+      '#markup' => $this->t('(@quality% Quality)', ['@quality' => $this->configuration['quality']]),
     ];
   }
 
